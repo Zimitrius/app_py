@@ -5,12 +5,11 @@ import wikipediaapi
 def get_keyphrase(user_text):  # get keyphrase from text end send keywords list to saver
 	rake_obj = RAKE.Rake("SmartStoplist.txt")
 	keywords = rake_obj.run(user_text)
-	return keywords
+	return '\n'.join(e[0] for e in keywords)
 
 
 def check_wiki_page_exst(word):  # check if keyphrase exist and return bool condition
-	wiki_wiki = wikipediaapi.Wikipedia('en')
-	page_check = wiki_wiki.page(word)
+	page_check = wikipediaapi.Wikipedia('en').page(word)
 	status = page_check.exists()
 	if status:
 		return page_check.fullurl  # get url

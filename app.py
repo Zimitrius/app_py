@@ -66,7 +66,7 @@ def create_article():
 	if request.method == "POST":
 		title = request.form['title']
 		text = request.form['text']
-		phrase = '\n'.join(e[0] for e in keyphrase_tools.get_keyphrase(text))
+		phrase = keyphrase_tools.get_keyphrase(text)
 		article = Article(title=title, text=text, phrase=phrase)
 		try:
 			db.session.add(article)  # add new text to data base
