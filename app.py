@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from keyphrase_extr import *
+import keyphrase_tools
 
 
 app = Flask(__name__)
@@ -30,7 +30,7 @@ def posts():
 @app.route('/all_keys')  # show top phrases from text
 def get_keys_top():
 	keys_all = Article.query.order_by(Article.date.desc()).all()
-	keys_all = get_top_phrases(keys_all)
+	keys_all = keyphrase_tools.get_top_phrases(keys_all)
 	return render_template('all_keys.html', title="all keys", keys=keys_all)
 
 
@@ -38,7 +38,7 @@ def get_keys_top():
 def post_detail(id):
 	article = Article.query.get(id)  # get data
 	title = article.title
-	keys = get_keyphrase(article.text)
+	keys = keyphrase_tools.get_keyphrase(article.text)
 	save_keyphrase(keys, id)
 	return render_template('post_keyphrases.html', keys=keys, title=title, id=id)
 
@@ -56,7 +56,7 @@ def post_delete(id):
 
 @app.route('/posts/<string:key>')  # chekc if wiki link exist for keyphrase
 def key_detal(key):
-	page = check_wiki_page_exst(key)
+	page = keyphrase_tools.check_wiki_page_exst(key)
 	return render_template('chek_wiki.html', key=key.upper(), page=page)
 
 
