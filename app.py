@@ -7,7 +7,7 @@ import keyphrase_tools
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)   #
+db = SQLAlchemy(app)
 
 
 class Article(db.Model):  # data base class
@@ -65,9 +65,7 @@ def create_article():
 	if request.method == "POST":
 		title = request.form['title']
 		text = request.form['text']
-
 		article = Article(title=title, text=text)
-
 		try:
 			db.session.add(article)  # add new text to data base
 			db.session.commit()
@@ -81,12 +79,9 @@ def create_article():
 
 def save_keyphrase(keys_p, id):  # save key phrases list
 	article = Article.query.get(id)
-
 	if article.phrases:
 		return
-
 	article.phrases = '\n'.join([e[0] for e in keys_p])
-
 	try:
 		db.session.add(article)
 		db.session.commit()
