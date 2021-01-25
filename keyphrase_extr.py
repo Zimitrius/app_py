@@ -17,7 +17,7 @@ def check_wiki_page_exst(word):  # check if keyphrase exist and return bool cond
 	return None  # wikipedia page not exist
 
 
-def get_top_phrases(list_all):
+def get_top_phrases(list_all):  # get sorted top list
 	doc = {}
 	for lst in list_all:
 		for key in lst.phrases.split('\n'):
