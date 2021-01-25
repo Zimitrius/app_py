@@ -10,10 +10,12 @@
         <div class="alert alert-info">
             <h2>{{ key }}</h2>
             {% if page %}
-                <br>keyphrase  "{{ key }}" exist in wikipedia</br>
+                <br>keyphrase  "{{ key }}" exist in wikipedia
                 <a href="{{page}}" class="btn btn-warning">go to wiki page</a>
+            <br>
+                <br><a href="/posts/{{ id }}" class="btn btn-warning">go bakc</a>
             {% else %}
-                <br>keyphrase  "{{ key }}" not exist in wikipedia </br>
+                <br>keyphrase  "{{ key }}" not exist in wikipedia <a href="/posts/{{ id }}" class="btn btn-warning">go bakc</a></br>
             {% endif %}
 
         </div>

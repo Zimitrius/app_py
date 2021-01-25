@@ -9,9 +9,11 @@
     <div class="container mt-5">
         <div class="alert alert-info">
             <h2> key phrases </h2>
-        {% for e in keys %}
-            <br> {{ e[0] }} - <a href="/posts/{{ e[0] }}" >chek if wikipedia page exist</a></br>
-        {% endfor %}
+            {% for e in keys %}
+        </div>
+        <div class="alert alert-info">
+            <br> {{ e }} - <a href="/posts/{{ e }}/{{ id }}">chek if wikipedia page exist</a></br>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

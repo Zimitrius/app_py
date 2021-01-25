@@ -20,6 +20,6 @@ def check_wiki_page_exst(word):  # check if keyphrase exist and return bool cond
 def get_top_phrases(list_all):  # get sorted top list
 	doc = {}
 	for lst in list_all:
-		for key in lst.phrases.split('\n'):
+		for key in lst.phrase.split('\n'):
 			doc[key] = doc.get(key, 0) + 1
 	return sorted(doc.items(), key=lambda x: x[1], reverse=1)
