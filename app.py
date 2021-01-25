@@ -7,10 +7,10 @@ from keyphrase_extr import *
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+db = SQLAlchemy(app)   #
 
 
-class Article(db.Model):
+class Article(db.Model):  # data base class
 	id = db.Column(db.Integer, primary_key=True)
 	title = db.Column(db.String(300), nullable=False)
 	text = db.Column(db.Text, nullable=False)
@@ -21,13 +21,13 @@ class Article(db.Model):
 		return f'<Article {self.id}>'
 
 
-@app.route('/posts')
+@app.route('/posts')  # get all text post
 def posts():
 	articles = Article.query.order_by(Article.date.desc()).all()  # all data from db
 	return render_template('posts.html', articles=articles)
 
 
-@app.route('/all_keys')
+@app.route('/all_keys')  # show top phrases from text
 def get_keys_top():
 	keys_all = Article.query.order_by(Article.date.desc()).all()
 	keys_all = get_top_phrases(keys_all)
@@ -43,7 +43,7 @@ def post_detail(id):
 	return render_template('post_keyphrases.html', keys=keys, title=title, id=id)
 
 
-@app.route('/posts/<int:id>/del')
+@app.route('/posts/<int:id>/del')  # deleted post
 def post_delete(id):
 	article = Article.query.get_or_404(id)
 	try:
@@ -54,13 +54,13 @@ def post_delete(id):
 		return 'Something’s not right \ntext not delet'
 
 
-@app.route('/posts/<string:key>')  # post keyphrase
+@app.route('/posts/<string:key>')  # chekc if wiki link exist for keyphrase
 def key_detal(key):
 	page = check_wiki_page_exst(key)
 	return render_template('chek_wiki.html', key=key.upper(), page=page)
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET'])  # main page add new text and save to data base
 def create_article():
 	if request.method == "POST":
 		title = request.form['title']
@@ -79,11 +79,10 @@ def create_article():
 		return render_template("create-article.html")
 
 
-def save_keyphrase(keys_p, id):
+def save_keyphrase(keys_p, id):  # save key phrases list
 	article = Article.query.get(id)
 
 	if article.phrases:
-		print('User Exists')
 		return
 
 	article.phrases = '\n'.join([e[0] for e in keys_p])
@@ -91,16 +90,10 @@ def save_keyphrase(keys_p, id):
 	try:
 		db.session.add(article)
 		db.session.commit()
-		print('keys save vere none')
+		return
 	except:
 		return 'Something’s not right \nTry again'
 
 
 if __name__ == '__main__':
 	app.run(debug=True)
-
-
-"""
-from app import db
-db.create_all()
-"""
