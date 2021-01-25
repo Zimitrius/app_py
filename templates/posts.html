@@ -13,8 +13,13 @@
                 <h2>{{ e.title }}</h2>
                 <p>{{ e.text }}</p>
                 <p><b>date: {{ e.date.date() }}</b></p>
-                <a href="/posts/{{ e.id }}" class="btn btn-warning">get key phrases</a>
-                <a href="/posts/{{ e.id }}/del" class="btn btn-danger">delet post</a>
+
+                <table class="text">
+                <tr>
+                    <td><a href="/posts/{{ e.id }}" class="btn btn-primary">get key phrases</a></td>
+                    <td class="rightcol"><a href="/posts/{{ e.id }}/del" class="btn btn-danger btn-sm">delet post</a></td>
+                </tr>
+            </table>
             </div>
         {% endfor %}
     </div>
