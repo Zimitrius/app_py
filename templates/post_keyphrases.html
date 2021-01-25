@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="alert alert-info">
+            <h2> key phrases </h2>
+        {% for e in keys %}
+            <br> {{ e[0] }} - <a href="/posts/{{ e[0] }}" >chek if wikipedia page exist</a></br>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

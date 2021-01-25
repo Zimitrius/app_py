@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ key }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="alert alert-info">
+            <h2>{{ key }}</h2>
+            {% if page %}
+                <br>keyphrase  "{{ key }}" exist in wikipedia</br>
+                <a href="{{page}}" class="btn btn-warning">go to wiki page</a>
+            {% else %}
+                <br>keyphrase  "{{ key }}" not exist in wikipedia </br>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}

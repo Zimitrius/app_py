@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+
+{% block body %}
+    <h2> keyphrase </h2>
+    <div class="container mt-5">
+        <h1> {{ article.title }} </h1>
+            <div class="alert alert-info">
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.text }}</p>
+                <p><b>date: {{ article.date.date() }}</b></p>
+            </div>
+    </div>
+{% endblock %}
