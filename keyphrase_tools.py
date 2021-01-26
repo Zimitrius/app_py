@@ -9,11 +9,10 @@ def get_keyphrase(user_text):  # get keyphrase from text end send keywords list 
 
 
 def check_wiki_page_exst(word):  # check if keyphrase exist and return bool condition
-	page_check = wikipediaapi.Wikipedia('en').page(word)
-	status = page_check.exists()
-	if status:
-		return page_check.fullurl  # get url
-	return None  # wikipedia page not exist
+	wiki_page = wikipediaapi.Wikipedia('en').page(word)
+	if not wiki_page.exists():
+		return None  # wikipedia page not exist
+	return wiki_page.fullurl  # get url
 
 
 def get_top_phrases(list_all):  # get sorted top list
