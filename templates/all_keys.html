@@ -9,8 +9,8 @@
     <div class="container mt-5">
         <h2> Top key phrases for all saved texts </h2>
         <div class="alert alert-info">
-            {% for e in keys %}
-                <br> {{ e[0] }} - {{ e[1] }} </br>
+            {% for e in keys  %}
+                <br>{% filter upper %} {{ e[0] }} - {{ e[1] }} {% endfilter %}</br>
             {% endfor %}
         </div>
     </div>

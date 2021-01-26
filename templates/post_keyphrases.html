@@ -16,7 +16,7 @@
         <div class="alert alert-info">
             <table class="text">
                 <tr>
-                    <td>{{ e }}</td>
+                    <td>"{% filter upper %}{{ e }}{% endfilter %}"</td>
                     <td class="rightcol"><a href="/posts/{{ e }}/{{ id }}" class="btn btn-info">chek if wikipedia page exist</a></td>
                 </tr>
             </table>

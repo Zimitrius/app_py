@@ -10,7 +10,7 @@
         <div class="alert alert-info">
             <h2>{{ key }}</h2>
             {% if page %}
-                <br>keyphrase  "{{ key }}" exist in wikipedia
+                <br>page for keyphrase "{{ key }}" exist in wikipedia
                 <br><br><br>
                 <table class="text">
                 <tr>
@@ -22,7 +22,7 @@
             {% else %}
                 <table class="text">
                 <tr>
-                <td>keyphrase  "{{ key }}" not exist in wikipedia</td> <td class="rightcol"><a href="/posts/{{ id }}" class="btn btn-dark">go bakc</a></td></br>
+                <td>page for keyphrase "{{ key }}" not exist in wikipedia</td> <td class="rightcol"><a href="/posts/{{ id }}" class="btn btn-dark">go bakc</a></td></br>
                 </tr>
                 </table>
             {% endif %}
