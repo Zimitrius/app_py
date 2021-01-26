@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    All post
+    All posts
 {% endblock %}
 
 {% block body %}
 
     <div class="container mt-5">
-        <h1> your last post </h1>
+        <h1> your last posts </h1>
         {% for e in articles %}
             <div class="alert alert-info">
                 <h2>{{ e.title }}</h2>
@@ -17,7 +17,7 @@
                 <table class="text">
                 <tr>
                     <td><a href="/posts/{{ e.id }}" class="btn btn-primary">get key phrases</a></td>
-                    <td class="rightcol"><a href="/posts/{{ e.id }}/del" class="btn btn-danger btn-sm">delet post</a></td>
+                    <td class="rightcol"><a href="/posts/{{ e.id }}/del" class="btn btn-danger btn-sm">delete post</a></td>
                 </tr>
             </table>
             </div>

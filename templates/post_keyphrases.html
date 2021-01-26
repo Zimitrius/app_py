@@ -11,13 +11,17 @@
     <div class="container mt-5">
         <div class="alert alert-info">
             <h2> key phrases </h2>
-            {% for e in keys %}
+            {% for k, w in keys %}
         </div>
         <div class="alert alert-info">
             <table class="text">
                 <tr>
-                    <td>"{% filter upper %}{{ e }}{% endfilter %}"</td>
-                    <td class="rightcol"><a href="/posts/{{ e }}/{{ id }}" class="btn btn-info">chek if wikipedia page exist</a></td>
+                    {% if w != '0' %}
+                    <td>{% filter upper %}"{{ k }}"{% endfilter %}</td>
+                    <td class="rightcol"><a href="{{ w }}" class="btn btn-info">do to wiki page</a></td>
+                    {% else %}
+                    <td>{% filter upper %}"{{ k }}"{% endfilter %}</td>
+                    {% endif %}
                 </tr>
             </table>
 
