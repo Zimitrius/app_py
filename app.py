@@ -31,6 +31,7 @@ class Keys(db.Model):
 	def __repr__(self):
 		return f'<Keys {self.id}>'
 
+
 @app.route('/all_keys')  # show top phrases from text
 def get_keys_top():
 	keys_all = Keys.query.order_by(Keys.id).all()
@@ -57,19 +58,6 @@ def posts():
 	return render_template('posts.html', articles=articles)
 
 
-
-def post_delete(id):
-	article = Article.query.get_or_404(id)
-	keys = Keys.query.get_or_404(id)
-	try:
-		db.session.delete(keys)
-		db.session.delete(article)
-		db.session.commit()
-		return redirect('/')
-	except:
-		return 'Something’s not right \ntext not deleted'
-
-
 @app.route('/', methods=['POST', 'GET'])  # main page add new text and save to data base
 def create_article():
 	if request.method == "POST":
@@ -87,6 +75,18 @@ def create_article():
 		except:
 			return 'Something’s not right \nTry again'
 	return render_template("create-article.html")
+
+
+def post_delete(id):
+	article = Article.query.get_or_404(id)
+	keys = Keys.query.get_or_404(id)
+	try:
+		db.session.delete(keys)
+		db.session.delete(article)
+		db.session.commit()
+		return redirect('/')
+	except:
+		return 'Something’s not right \ntext not deleted'
 
 
 if __name__ == '__main__':
