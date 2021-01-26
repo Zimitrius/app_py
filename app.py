@@ -23,7 +23,6 @@ class Article(db.Model):  # data base class
 
 class Keys(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	title = db.Column(db.String(300),  nullable=True)
 	phrase = db.Column(db.Text, nullable=True)
 	wiki_page = db.Column(db.Text, nullable=True)
 	#article_id = db.Column(db.Integer(), db.ForeignKey('Article.id'))
@@ -44,9 +43,8 @@ def post_detail(id):
 	if request.method == 'POST':
 		return post_delete(id)
 	kp = Keys.query.get(id)  # get data
-	title = kp.title
 	keys = zip(kp.phrase.split('\n'), kp.wiki_page.split(' '))
-	return render_template('post_keyphrases.html', keys=keys, title=title, id=id, )
+	return render_template('post_keyphrases.html', keys=keys, id=id, )
 
 
 @app.route('/posts')  # get all text post
@@ -61,8 +59,8 @@ def posts():
 @app.route('/', methods=['POST', 'GET'])  # main page add new text and save to data base
 def create_article():
 	if request.method == "POST":
-		title = request.form['title']
 		text = request.form['text']
+		title = request.form['title']
 		phrase = keyphrase_tools.get_keyphrase(text)
 		wiki_info = ' '.join( keyphrase_tools.check_wiki_page_exst(key) for key in phrase )
 		article = Article(title=title, text=text)
