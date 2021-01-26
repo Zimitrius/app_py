@@ -14,7 +14,7 @@ class Article(db.Model):  # data base class
 	title = db.Column(db.String(300), nullable=False)
 	text = db.Column(db.Text, nullable=False)
 	date = db.Column(db.DateTime, default=datetime.utcnow)
-	#posts = db.relationship('Post', backref='Article', uselist=False)
+	#keys = db.relationship('Post', backref='Article', uselist=False)
 
 	def __repr__(self):
 		return f'<Article {self.id}>'
@@ -54,9 +54,8 @@ def posts():
 	return render_template('posts.html', articles=articles)
 
 
-@app.route('/posts/<int:id>/del',methods=['GET', 'DELETE'])  # deleted post
+@app.route('/posts/<int:id>/del')  # deleted post
 def post_delete(id):
-	print(request.method ,request.form)
 	article = Article.query.get_or_404(id)
 	keys = Keys.query.get_or_404(id)
 	try:
