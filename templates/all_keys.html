@@ -10,7 +10,7 @@
         <h2> Top key phrases for all saved texts </h2>
         <div class="alert alert-info">
             {% for e in keys  %}
-                <br>{% filter upper %} {{ e[0] }} - {{ e[1] }} {% endfilter %}</br>
+                <br> {{ e[0] }} - {{ e[1] }}</br>
             {% endfor %}
         </div>
     </div>

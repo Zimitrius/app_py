@@ -18,6 +18,6 @@ def check_wiki_page_exst(word):
 def get_top_phrases(list_all):
 	doc = {}
 	for lst in list_all:
-		for key in lst.phrase.split('\n'):
+		for key in lst.phrase.upper().split('\n'):
 			doc[key] = doc.get(key, 0) + 1
 	return sorted(doc.items(), key=lambda x: x[1], reverse=1)
