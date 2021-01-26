@@ -37,8 +37,10 @@ def get_keys_top():
 	return render_template('all_keys.html', title="all keys", keys=keys_all)
 
 
-@app.route('/posts/<int:id>')  # post keyphrase
+@app.route('/posts/<int:id>', methods=['POST', 'GET'])  # post keyphrase
 def post_detail(id):
+	if request.method == 'POST':
+		return post_delete(id)
 	kp = Keys.query.get(id)  # get data
 	title = kp.title
 	keys = zip(kp.phrase.split('\n'), kp.wiki_page.split(' '))
@@ -54,7 +56,7 @@ def posts():
 	return render_template('posts.html', articles=articles)
 
 
-@app.route('/posts/<int:id>/del')  # deleted post
+
 def post_delete(id):
 	article = Article.query.get_or_404(id)
 	keys = Keys.query.get_or_404(id)
