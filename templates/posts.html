@@ -10,16 +10,14 @@
         <h1> your last posts </h1>
         {% for e in articles %}
             <div class="alert alert-info">
-                <h2>{{ e.title }}</h2>
-                <p>{{ e.text }}</p>
-                <p><b>date: {{ e.date.date() }}</b></p>
-
+                    <h2>{{ e.title }}</h2>
+                    <p>{{ e.text }}</p>
+                    <p><b>date: {{ e.date.date() }}</b></p>
                 <table class="text">
-                <tr>
-                    <td><a href="/posts/{{ e.id }}" class="btn btn-primary">get key phrases</a></td>
-
-                </tr>
-            </table>
+                    <tr>
+                        <td><a href="/posts/{{ e.id }}" class="btn btn-primary">go to key phrases</a></td>
+                    </tr>
+                </table>
             </div>
         {% endfor %}
     </div>

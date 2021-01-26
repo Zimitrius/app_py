@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import keyphrase_tools
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -85,8 +86,7 @@ def create_article():
 			return redirect('/posts')
 		except:
 			return 'Something’s not right \nTry again'
-	else:
-		return render_template("create-article.html")
+	return render_template("create-article.html")
 
 
 if __name__ == '__main__':
