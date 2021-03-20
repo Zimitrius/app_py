@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import keyphrase_tools
 
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -15,7 +14,8 @@ class Article(db.Model):  # data base class
 	title = db.Column(db.String(300), nullable=False)
 	text = db.Column(db.Text, nullable=False)
 	date = db.Column(db.DateTime, default=datetime.utcnow)
-	#keys = db.relationship('Post', backref='Article', uselist=False)
+
+	# keys = db.relationship('Post', backref='Article', uselist=False)
 
 	def __repr__(self):
 		return f'<Article {self.id}>'
@@ -25,7 +25,8 @@ class Keys(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	phrase = db.Column(db.Text, nullable=True)
 	wiki_page = db.Column(db.Text, nullable=True)
-	#article_id = db.Column(db.Integer(), db.ForeignKey('Article.id'))
+
+	# article_id = db.Column(db.Integer(), db.ForeignKey('Article.id'))
 
 	def __repr__(self):
 		return f'<Keys {self.id}>'
@@ -62,7 +63,7 @@ def create_article():
 		text = request.form['text']
 		title = request.form['title']
 		phrase = keyphrase_tools.get_keyphrase(text)
-		wiki_info = ' '.join( keyphrase_tools.check_wiki_page_exst(key) for key in phrase )
+		wiki_info = ' '.join(keyphrase_tools.check_wiki_page_exst(key) for key in phrase)
 		article = Article(title=title, text=text)
 		keys = Keys(phrase='\n'.join(phrase), wiki_page=wiki_info)
 		try:
@@ -75,8 +76,14 @@ def create_article():
 	return render_template("create-article.html")
 
 
+@app.after_request
+def after_request(response):
+	print("after_request() called")
+	return response
+
+
 def post_delete(id):
-	article = Article.query.get_or_404(id)
+	article: object = Article.query.get_or_404(id)
 	keys = Keys.query.get_or_404(id)
 	try:
 		db.session.delete(keys)
